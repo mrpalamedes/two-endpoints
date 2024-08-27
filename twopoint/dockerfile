@@ -1,0 +1,24 @@
+# Gunakan gambar resmi Python
+FROM python:3.8-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Buat dan pindahkan ke direktori kerja /app
+WORKDIR /app
+
+# Salin dependensi file ke dalam kontainer
+COPY requirements.txt /app/
+
+# Install dependensi
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Salin aplikasi kode ke dalam kontainer
+COPY app /app
+
+# Port yang akan digunakan oleh aplikasi Flask
+EXPOSE 5000
+
+# Perintah yang akan dijalankan saat kontainer dimulai
+CMD ["python", "main.py"]
